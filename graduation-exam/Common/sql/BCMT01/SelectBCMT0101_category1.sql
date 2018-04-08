@@ -1,0 +1,1 @@
+﻿AND DIVISION_ID1 = '{0}'

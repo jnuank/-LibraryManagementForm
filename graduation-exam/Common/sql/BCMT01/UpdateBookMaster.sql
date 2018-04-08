@@ -1,0 +1,11 @@
+﻿UPDATE
+	BOOK_MASTER
+SET
+	BOOK_NAME='{0}'
+	, ARRIVAL_USER_ID='{1}'
+	, ARRIVAL_DATE=Datetime('{2}')
+	, DIVISION_ID1='{3}'
+	, DIVISION_ID2='{4}'
+	, DIVISION_ID3='{5}'
+WHERE
+	BOOK_ID='{6}'

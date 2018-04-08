@@ -1,0 +1,1 @@
+﻿INSERT INTO BOOK_MASTER VALUES('{0}', '{1}', '{2}', datetime('{3}'), '{4}', '{5}', '{6}')
