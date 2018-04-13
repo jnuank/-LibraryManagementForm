@@ -1,6 +1,6 @@
 # LibraryManagementForm
  LibraryManagementForm (Windows Form &amp; SQLite)
- 
+ 約1年前に書いたコード。
 
 ### 修正予定
 
