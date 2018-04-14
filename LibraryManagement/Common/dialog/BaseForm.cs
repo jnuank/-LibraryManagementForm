@@ -53,27 +53,24 @@ namespace Common.dialog
         /// <summary>
         /// 確認画面
         /// </summary>
-        /// <returns></returns>
+        /// <param name="message"></param>
+        /// <returns>true=OK false=Cancel</returns>
         protected bool AskMessageBox(string message)
         {
-            DialogResult result = MessageBox.Show(message,
-            "確認",
-            MessageBoxButtons.OKCancel,
-            MessageBoxIcon.Question,
-            MessageBoxDefaultButton.Button2);
+            DialogResult dr = MessageBox.Show(message,
+                                                    "確認",
+                                                    MessageBoxButtons.OKCancel,
+                                                    MessageBoxIcon.Question,
+                                                    MessageBoxDefaultButton.Button2);
 
-            bool flag = true;
-            switch ( result )
+            if (dr == DialogResult.OK)
             {
-                case DialogResult.OK:
-                    flag = true;
-                    break;
-                case DialogResult.Cancel:
-                    flag = false;
-                    break;
+                return true;
             }
-            return flag;
-
+            else
+            {
+                return false;
+            }
         }
     }
 }

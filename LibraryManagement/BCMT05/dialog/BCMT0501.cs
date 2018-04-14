@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using Common.db;
+using Common.define;
 using Common.dialog;
 using Common.exception;
-using Common.define;
 using Common.singleton;
-using Common.db;
+using System;
+using System.Windows.Forms;
 
 namespace BCMT05.dialog
 {
@@ -41,12 +34,14 @@ namespace BCMT05.dialog
                         MessageBox.Show(GlobalDefine.MESSAGE_PASSWORD_CHANGE);
                         this.Close();
                     }
-                }else
+                }
+                else
                 {
                     throw new InputException(GlobalDefine.ERROR_CODE[8].message, GlobalDefine.ERROR_CODE[8].code);
                 }
 
-            }catch(InputException ex)
+            }
+            catch (InputException ex)
             {
                 MessageBox.Show(ex.Message);
                 txtPass.Clear();

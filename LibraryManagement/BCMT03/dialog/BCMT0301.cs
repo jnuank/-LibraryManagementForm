@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using BCMT03.src;
+﻿using Common.define;
 using Common.dialog;
-using Common.define;
 using Common.singleton;
+using System;
+using System.Data;
+using System.Windows.Forms;
 
 namespace BCMT03.dialog
 {
@@ -42,7 +35,6 @@ namespace BCMT03.dialog
         private void InitDialog()
         {
             this.Text = GlobalDefine.FORM_NAME;
-
             this.dataTable = SingletonObject.GetMemberList();
         }
 
@@ -106,8 +98,7 @@ namespace BCMT03.dialog
         // フォームのクロージング確認処理
         private void BCMT0301_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if ( base.IsCancelClosing(GlobalDefine.MESSAGE_ASK_CLOSE) )
-                e.Cancel = true;
+            e.Cancel = base.IsCancelClosing(GlobalDefine.MESSAGE_ASK_CLOSE);
         }
     }
 }

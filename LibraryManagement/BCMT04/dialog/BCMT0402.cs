@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Common.db;
+﻿using Common.db;
 using Common.define;
 using Common.dialog;
-using Common.singleton;
 using Common.ErrorCheck;
 using Common.exception;
+using Common.singleton;
+using System;
+using System.Data;
+using System.Windows.Forms;
 
 namespace BCMT04.dialog
 {

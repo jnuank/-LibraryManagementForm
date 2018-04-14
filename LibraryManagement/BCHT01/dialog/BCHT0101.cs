@@ -1,21 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using BCCM01.dialog;
 using Common.db;
 using Common.define;
 using Common.dialog;
-using Common.singleton;
-using Common.exception;
 using Common.ErrorCheck;
-using BCCM01.dialog;
 using Common.excel;
-using System.IO;
+using Common.exception;
+using Common.singleton;
+using System;
+using System.Data;
+using System.Windows.Forms;
 using static Common.define.GlobalDefine;
 
 namespace BCHT01.dialog
@@ -33,9 +26,6 @@ namespace BCHT01.dialog
 
         // コンボボックスが空白
         private readonly static int IS_CMB_BOX_EMPTY = 0;
-
-        // エラーコード
-        private static readonly int DATE_INVALID_CODE = 21;
 
         // ファイル名(相対パス)
         public static readonly string BOOK_RANKING_NAME = @"..\..\..\ブックランキング帳票.xlsx";
@@ -69,12 +59,12 @@ namespace BCHT01.dialog
             this.cmbCategory3.InitControl();
 
             rdMonthTop.Checked = true;
-            rdBook.Checked = true;
+            rdBook.Checked     = true;
 
             groupRanking.Enabled = false;
 
             dateLoanStart.Value = DateTime.Now;
-            dateLoanEnd.Value = DateTime.Now;
+            dateLoanEnd.Value   = DateTime.Now;
             
         }
 
@@ -98,7 +88,7 @@ namespace BCHT01.dialog
         /// <param name="e"></param>
         private void btnClose_Click(object sender, EventArgs e)
         {
-            this.Close();
+            base.Close();
         }
 
         /// <summary>
@@ -108,8 +98,7 @@ namespace BCHT01.dialog
         /// <param name="e"></param>
         private void BCHT0101_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if ( base.IsCancelClosing(GlobalDefine.MESSAGE_ASK_CLOSE) )
-                e.Cancel = true;
+            e.Cancel = base.IsCancelClosing(GlobalDefine.MESSAGE_ASK_CLOSE);
         }
 
         /// <summary>
@@ -149,18 +138,7 @@ namespace BCHT01.dialog
         /// <param name="e"></param>
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            try
-            {
-                SearchInputChecks();
-            }
-            catch(InputException ex)
-            {
-                MessageBox.Show(ex.Message);
-                if ( ex.ERROR_CODE == DATE_INVALID_CODE)
-                    return;
-                ex.ERROR_TEXTBOX.Clear();
-                ex.ERROR_TEXTBOX.Focus();
-            }
+            SearchInputChecks();
 
             // 検索開始
             if(chkRanking.Checked)
@@ -214,15 +192,8 @@ namespace BCHT01.dialog
         /// <param name="e"></param>
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            try
-            {
-                ExcelPrintChecks();
-            }
-            catch(InputException ex)
-            {
-                MessageBox.Show(ex.Message);
-                return;
-            }
+            ExcelPrintChecks();
+
 
             // 帳票をプリントする
             if ( chkRanking.Checked )
@@ -362,10 +333,10 @@ namespace BCHT01.dialog
             this.txtId.Clear();
             this.txtTitle.Clear();
             this.txtUserName.Clear();
-            this.dateLoanStart.Value = DateTime.Now;
-            this.dateLoanEnd.Value = DateTime.Now;
-            this.chkLending.Checked = false;
-            this.chkScheduleOver.Checked = false;
+            this.dateLoanStart.Value        = DateTime.Now;
+            this.dateLoanEnd.Value          = DateTime.Now;
+            this.chkLending.Checked         = false;
+            this.chkScheduleOver.Checked    = false;
             this.cmbCategory1.SelectedIndex = 0;
             this.cmbCategory2.SelectedIndex = 0;
             this.cmbCategory3.SelectedIndex = 0;

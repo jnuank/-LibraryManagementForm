@@ -118,18 +118,8 @@ namespace BCRT01.dialog
             if ( string.IsNullOrEmpty(this.txtId.Text) )
                 return;
 
-            try
-            {
-                CheckTxtId();
-            }
-            catch(InputException ex)
-            {
-                MessageBox.Show(ex.Message);
-                ex.ERROR_TEXTBOX.Clear();
-                ex.ERROR_TEXTBOX.Focus();
+            CheckTxtId();
 
-                return;
-            }
 
             // チェック処理で問題なければ、検索実施
 
@@ -210,18 +200,7 @@ namespace BCRT01.dialog
         /// <param name="e"></param>
         private void btnReturn_Click(object sender, EventArgs e)
         {
-            try
-            {
-                ReturnCheckes();
-            }
-            catch ( InputException ex )
-            {
-                MessageBox.Show(ex.Message);
-                ex.ERROR_TEXTBOX.Clear();
-                ex.ERROR_TEXTBOX.Focus();
-
-                return;
-            }
+            ReturnCheckes();
 
             // 確認ダイアログを表示
             if ( !AskMessageBox(GlobalDefine.MESSAGE_ASK_RETURN) )

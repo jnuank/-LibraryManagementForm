@@ -2,7 +2,6 @@
 using Common.define;
 using Common.dialog;
 using Common.ErrorCheck;
-using Common.exception;
 using Common.singleton;
 using System;
 using System.Data;
@@ -76,24 +75,13 @@ namespace BCMT01.dialog
         {
             DbQuery dc = SingletonObject.GetDbQuery();
 
-            // エラーチェック
-            //try
-            //{
-                ErrorChecks();
+            ErrorChecks();
 
-                dataGridView1.Table = dc.SelectManagedBooks(this.txtId.Text, 
-                                                            this.txtTitle.Text,
-                                                            cmbCategory1.SelectedValue.ToString(),
-                                                            cmbCategory2.SelectedValue.ToString(),
-                                                            cmbCategory3.SelectedValue.ToString());
-
-            //}
-            //catch ( InputException ex )
-            //{
-            //    MessageBox.Show(ex.Message);
-            //    ex.ERROR_TEXTBOX.Clear();
-            //    ex.ERROR_TEXTBOX.Focus();
-            //}
+            dataGridView1.Table = dc.SelectManagedBooks(this.txtId.Text, 
+                                                        this.txtTitle.Text,
+                                                        cmbCategory1.SelectedValue.ToString(),
+                                                        cmbCategory2.SelectedValue.ToString(),
+                                                        cmbCategory3.SelectedValue.ToString());
 
             // データグリッドビューの更新
             InitGridView();
@@ -141,8 +129,6 @@ namespace BCMT01.dialog
             if ( base.IsCancelClosing(GlobalDefine.MESSAGE_ASK_CLOSE) )
                 e.Cancel = true;
         }
-
-
 
         /// <summary>
         /// グリッドビュー、セルダブルクリック

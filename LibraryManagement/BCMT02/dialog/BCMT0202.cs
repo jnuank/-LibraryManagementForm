@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using BCMT02.src;
-using Common.dialog;
-using Common.db;
+﻿using Common.db;
 using Common.define;
+using Common.dialog;
 using Common.exception;
 using Common.singleton;
+using System;
+using System.Data;
+using System.Windows.Forms;
 
 namespace BCMT02.dialog
 {
@@ -123,7 +116,7 @@ namespace BCMT02.dialog
         private void btnClose_Click(object sender, EventArgs e)
         {
             // クローズ時に、FormClosingイベントが呼ばれる
-            this.Close();
+            base.Close();
         }
 
         /// <summary>
@@ -149,8 +142,7 @@ namespace BCMT02.dialog
                 {
                     msg = GlobalDefine.MESSAGE_ASK_CLOSE_CHANGE;
                 }
-                if ( base.IsCancelClosing(msg) )
-                { e.Cancel = true; }
+                e.Cancel = base.IsCancelClosing(msg);
             }
         }
 
@@ -253,46 +245,29 @@ namespace BCMT02.dialog
         /// <param name="e"></param>
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            #region エラーチェック
+            // エラーチェック
+            DeleteCheck();
 
-            try
-            {
-                DeleteCheck();
-            }
-            catch ( InputException ex )
-            {
-                MessageBox.Show(ex.Message);
-                return;
-            }
-
-            #endregion
-
-            string msg;
             // 画面時に保持した変数と入力された項目を比較して、MessageBoxに表示するメッセージを変更する
-            if ( this.textName.Text.Equals(this.tempCategoryName))
-            {
-                msg = GlobalDefine.MESSAGE_ASK_DELETE;
-            }else
-            {
-                msg = GlobalDefine.MESSAGE_ASK_DELETE_CHANGE;
-            }
-
+            string msg = 
+                textName.Text.Equals(this.tempCategoryName) ? GlobalDefine.MESSAGE_ASK_DELETE : GlobalDefine.MESSAGE_ASK_DELETE_CHANGE;
+            
             // 確認メッセージ表示
-            if ( base.AskMessageBox(msg) )
-            {   // 削除実行
+            if ( AskMessageBox(msg) )
+            {   
+                // 削除実行
                 DBAdapter dba = SingletonObject.GetDbAdapter();
                 string query = string.Format("DELETE FROM BOOK_GENRE_MASTER WHERE DIVISION_ID = '{0}'", this.textId.Text);
                 dba.nonExecSQL(query);
 
                 MessageBox.Show(GlobalDefine.MESSAGE_COMPLETE_DELETE);
+                
                 // 削除モードに変更(確認dialog出さずに、フォーム閉じる為)
                 mode = MODE.DEL;
                 this.Close();
             }
-            else
-            {   // キャンセル
-                return;
-            }
+
+            return;
         }
 
         #endregion

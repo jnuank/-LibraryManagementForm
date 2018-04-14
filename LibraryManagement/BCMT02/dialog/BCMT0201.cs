@@ -44,8 +44,7 @@ namespace BCMT02.dialog
         /// </summary>
         private void InitDialog()
         {
-            this.Text = GlobalDefine.FORM_NAME;
-
+            this.Text      = GlobalDefine.FORM_NAME;
             this.dataTable = SingletonObject.GetMemberList();
         }
 
@@ -61,8 +60,8 @@ namespace BCMT02.dialog
             dataGridView1.InitControl();
 
             // 分類IDセル
-            dataGridView1.Columns[(int)COLUMNS.ID].HeaderText = GlobalDefine.DIVISION_ID;
-            dataGridView1.Columns[(int)COLUMNS.ID].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView1.Columns[(int)COLUMNS.ID].HeaderText                 = GlobalDefine.DIVISION_ID;
+            dataGridView1.Columns[(int)COLUMNS.ID].AutoSizeMode               = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView1.Columns[(int)COLUMNS.ID].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             // 分類名称
@@ -105,7 +104,7 @@ namespace BCMT02.dialog
         // 閉じるボタン
         private void btnClose_Click(object sender, EventArgs e)
         {
-            this.Close();
+            base.Close();
         }
 
         // フォームのクロージング確認処理

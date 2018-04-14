@@ -20,8 +20,11 @@ namespace Common.exception
                 var ex = e.Exception as InputException;
 
                 MessageBox.Show(ex.Message);
-                ex.ERROR_TEXTBOX.Clear();
-                ex.ERROR_TEXTBOX.Focus();
+                if(ex.ERROR_TEXTBOX != null)
+                {
+                    ex.ERROR_TEXTBOX.Clear();
+                    ex.ERROR_TEXTBOX.Focus();
+                }
             }
             else
             {

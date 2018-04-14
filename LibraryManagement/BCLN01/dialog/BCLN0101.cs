@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Common.singleton;
+﻿using BCCM01.dialog;
 using Common.db;
 using Common.define;
 using Common.dialog;
-using Common.exception;
 using Common.ErrorCheck;
-using BCCM01.dialog;
+using Common.exception;
+using Common.singleton;
+using System;
+using System.Data;
+using System.Windows.Forms;
 
 namespace BCLN01.dialog
 {
@@ -26,7 +20,7 @@ namespace BCLN01.dialog
         #region フィールド
 
         private DataTable dataTable = new DataTable();
-        private string userId = "";
+        private string userId       = "";
 
         private readonly static int USER_NAME_EMPTY = 17;
         private readonly static int DATE_EMPTY      = 18;
@@ -84,7 +78,6 @@ namespace BCLN01.dialog
         private void InitDiag()
         {
             DBAdapter dba = SingletonObject.GetDbAdapter();
-
             this.dataTable = SingletonObject.GetMemberList();
 
             this.txtId.Clear();
@@ -94,8 +87,6 @@ namespace BCLN01.dialog
             this.txtUserName.Clear();
             this.txtTitle.Clear();
             this.dateReturn.Value = DateTime.Now;
-
-            
         }
 
         #region イベント
@@ -121,8 +112,7 @@ namespace BCLN01.dialog
             if ( mode == MODE.FORCE_CLOSE )
                 return;
 
-            if ( base.IsCancelClosing(GlobalDefine.MESSAGE_ASK_CLOSE) )
-                e.Cancel = true;
+            e.Cancel = base.IsCancelClosing(GlobalDefine.MESSAGE_ASK_CLOSE);
         }
 
         /// <summary>
@@ -136,18 +126,7 @@ namespace BCLN01.dialog
             if ( string.IsNullOrEmpty(this.txtId.Text) )
                 return;
 
-            try
-            {
-                CheckTxtId();
-            }
-            catch(InputException ex)
-            {
-                MessageBox.Show(ex.Message);
-                ex.ERROR_TEXTBOX.Clear();
-                ex.ERROR_TEXTBOX.Focus();
-
-                return;
-            }
+            CheckTxtId();
 
             // チェック処理で問題なければ、検索実施
 

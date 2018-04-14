@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using BCMT03.src;
-using Common.dialog;
-using Common.db;
+﻿using Common.db;
 using Common.define;
+using Common.dialog;
 using Common.exception;
 using Common.singleton;
+using System;
+using System.Data;
+using System.Windows.Forms;
 
 namespace BCMT03.dialog
 {
@@ -145,7 +138,8 @@ namespace BCMT03.dialog
             if(mode == MODE.DEL)
             {
                 // do nothing     
-            }else // 新規追加、編集モード
+            }
+            else // 新規追加、編集モード
             {
                 string msg;
                 // 画面時に保持した変数と入力された項目を比較して、MessageBoxに表示するメッセージを変更する
@@ -157,8 +151,7 @@ namespace BCMT03.dialog
                 {
                     msg = GlobalDefine.MESSAGE_ASK_CLOSE_CHANGE;
                 }
-                if ( base.IsCancelClosing(msg) )
-                { e.Cancel = true; }
+                e.Cancel = base.IsCancelClosing(msg);
             }
         }
 

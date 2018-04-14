@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Common.db;
+﻿using Common.db;
 using Common.define;
-using Common.singleton;
 using Common.dialog;
 using Common.ErrorCheck;
 using Common.exception;
+using Common.singleton;
+using System;
+using System.Windows.Forms;
 
 
 namespace BCCM01.dialog
@@ -46,15 +39,11 @@ namespace BCCM01.dialog
         }
 
         /// <summary>
-        /// デリゲート有り
+        /// デリゲート有りコンストラクタ
         /// </summary>
         /// <param name="func"></param>
-        public BCCM0101(DelegateFunc func)
+        public BCCM0101(DelegateFunc func) : this()
         {
-            InitializeComponent();
-            InitDialog();
-            InitGridView();
-
             this.applyFunc = func;
         }
 
@@ -173,20 +162,13 @@ namespace BCCM01.dialog
         /// <param name="e"></param>
         private void btnApply_Click(object sender, EventArgs e)
         {
-            try
-            {
-                ApplyBtnCheckes();
-            }
-            catch(InputException ex)
-            {
-                MessageBox.Show(ex.Message);
-                return;
-            }
+            // チェック処理
+            ApplyBtnCheckes();
 
             // 反映開始
             applyFunc(dataGridView1.CurrentRow.Cells[0].Value.ToString(), dataGridView1.CurrentRow.Cells[1].Value.ToString());
 
-            this.Close();
+            base.Close();
         }
 
         #endregion
@@ -198,8 +180,8 @@ namespace BCCM01.dialog
         /// </summary>
         private void SearchInputChecks()
         {
-            
-            if(cmbCompany.SelectedIndex <= COMPANY_EMPTY)
+           　
+            if(cmbCompany.SelectedIndex <= 0) // ←なぜ0「以下」
                 throw new InputException(GlobalDefine.ERROR_CODE[15].message, GlobalDefine.ERROR_CODE[15].code);
 
             // シングルクォーテーションチェック
@@ -231,10 +213,10 @@ namespace BCCM01.dialog
         /// <param name="flag"></param>
         private void SearchBoxEnable(bool flag)
         {
-            textUser.Enabled = flag;
+            textUser.Enabled   = flag;
             cmbCompany.Enabled = flag;
-            btnSearch.Enabled = flag;
-            btnApply.Enabled = !(flag);
+            btnSearch.Enabled  = flag;
+            btnApply.Enabled   = !(flag);
         }
 
         /// <summary>

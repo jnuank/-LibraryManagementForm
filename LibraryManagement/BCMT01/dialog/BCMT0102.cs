@@ -127,18 +127,9 @@ namespace BCMT01.dialog
                 }
             }
 
-            try
-            {
-                ApplyButtonCheck();
-            }
-            catch(InputException ex)
-            {
-                MessageBox.Show(ex.Message);
-                ex.ERROR_TEXTBOX.Clear();
-                ex.ERROR_TEXTBOX.Focus();
-                return;
-            }
-
+            
+            ApplyButtonCheck();
+        
             if(mode == MODE.ADD)
             {
                 if ( !base.AskMessageBox(GlobalDefine.MESSAGE_ASK_REGISTRATION) )
