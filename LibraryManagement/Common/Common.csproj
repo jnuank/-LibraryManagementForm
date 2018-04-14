@@ -98,6 +98,7 @@
     <Compile Include="define\GlobalDefine.cs" />
     <Compile Include="ErrorCheck\InputCheck.cs" />
     <Compile Include="excel\ExcelManager.cs" />
+    <Compile Include="exception\ExceptionHandler.cs" />
     <Compile Include="exception\InputException.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
