@@ -8,12 +8,15 @@ using Common.singleton;
 using Common.ErrorCheck;
 using Common.exception;
 using BCCM01.dialog;
+using BCMT01.logic;
 
 
 namespace BCMT01.dialog
 {
     public partial class BCMT0102 : BaseForm
     {
+        private BookEditLogic logic = new BookEditLogic();
+
         #region フィールド
 
         // 【編集時】初期値保存用
@@ -119,34 +122,25 @@ namespace BCMT01.dialog
         {
             if ( mode == MODE.MOD )
             {
-                bool valueEqual = ValueCompare();
-                if ( valueEqual )
+                if (ValueCompare())
                 {
                     MessageBox.Show(GlobalDefine.MESSAGE_NOT_CHANGE_UPDATE);
                     return;
                 }
             }
-
             
-            ApplyButtonCheck();
+            logic.ApplyButtonCheck(this.txtTitle);
         
-            if(mode == MODE.ADD)
+            DbQuery dc = SingletonObject.GetDbQuery();
+
+            if (mode == MODE.ADD)
             {
                 if ( !base.AskMessageBox(GlobalDefine.MESSAGE_ASK_REGISTRATION) )
                     return;
 
                 // ID MAX値取得
-                DbQuery dc = SingletonObject.GetDbQuery();
-                DBAdapter dba = SingletonObject.GetDbAdapter();
 
-                // 新規ID取得(MAX値+1)
-                string newStringId = dba.GetMaxID(nameof(GlobalDefine.BOOK_ID), GlobalDefine.BOOK_MASTER);
-                newStringId = newStringId.Substring(1);
-
-                int newId = int.Parse(newStringId) + 1;
-
-                // 0埋めして新規ID作成
-                string newIdText = string.Format("B{0:D3}", newId);
+                string newIdText = logic.GetNewId(nameof(GlobalDefine.BOOK_ID), GlobalDefine.BOOK_MASTER);
 
                 // テーブルに新規レコードを追加する
                 dc.InsertBookMaster(newIdText,
@@ -179,9 +173,6 @@ namespace BCMT01.dialog
                     return;
 
                 // テーブル更新
-                DbQuery dc = SingletonObject.GetDbQuery();
-                DBAdapter dba = SingletonObject.GetDbAdapter();
-
                 dc.UpdateBookMaster(this.txtTitle.Text,
                                     this.userId,
                                     this.dateArrival.Value,
@@ -315,12 +306,12 @@ namespace BCMT01.dialog
         }
 
         /// <summary>
-        /// 値比較
+        /// すべてのフォームの値を比較した結果を返す
         /// </summary>
         /// <returns></returns>
         private bool ValueCompare()
         {
-            bool equal = (
+            return (
                 this.title.Equals(this.txtTitle.Text) &&
                 this.cate1.Equals(this.cmbCategory1.SelectedValue.ToString()) &&
                 this.cate2.Equals(this.cmbCategory2.SelectedValue.ToString()) &&
@@ -328,8 +319,6 @@ namespace BCMT01.dialog
                 this.userName.Equals(this.txtUserName.Text) &&
                 this.arrivalDate.Date.Equals(this.dateArrival.Value.Date)
             );
-
-            return equal;
         }
 
         /// <summary>
