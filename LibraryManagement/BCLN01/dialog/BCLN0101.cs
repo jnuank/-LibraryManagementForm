@@ -121,7 +121,7 @@ namespace BCLN01.dialog
             if ( mode == MODE.FORCE_CLOSE )
                 return;
 
-            if ( base.CloseFunction(GlobalDefine.MESSAGE_ASK_CLOSE) )
+            if ( base.IsCancelClosing(GlobalDefine.MESSAGE_ASK_CLOSE) )
                 e.Cancel = true;
         }
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BCMN01.dialog;
+using Common.exception;
 
 
 namespace BCMN01
@@ -16,6 +17,7 @@ namespace BCMN01
         [STAThread]
         static void Main()
         {
+            Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(ExceptionHandler.ApplicationThreadException);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new BCMN0101());

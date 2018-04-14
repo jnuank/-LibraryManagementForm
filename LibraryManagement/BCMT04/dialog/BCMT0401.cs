@@ -116,7 +116,7 @@ namespace BCMT04.dialog
         /// <param name="e"></param>
         private void BCMT0401_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if ( base.CloseFunction(GlobalDefine.MESSAGE_ASK_CLOSE) )
+            if ( base.IsCancelClosing(GlobalDefine.MESSAGE_ASK_CLOSE) )
             { e.Cancel = true; }
         }
         

@@ -69,6 +69,9 @@ namespace BCMT02.dialog
             dataGridView1.Columns[(int)COLUMNS.NAME].HeaderText = GlobalDefine.DIVISION_NAME;
         }
 
+
+        #region イベント
+
         // 新規作成ボタン
         private void btnNew_Click(object sender, EventArgs e)
         {
@@ -88,18 +91,8 @@ namespace BCMT02.dialog
             // 選択された行を取得
             DataRow row = dataTable.Rows[nTarget];
 
-            try
-            {
-                if ( row == null )
-                    throw new InputException(GlobalDefine.ERROR_CODE[6].message, GlobalDefine.ERROR_CODE[6].code);
-            }
-            catch ( InputException ex )
-            {
-                //処理実行
-                MessageBox.Show(ex.Message);
-
-                return;
-            }
+            if ( row == null )
+                throw new InputException(GlobalDefine.ERROR_CODE[6].message, GlobalDefine.ERROR_CODE[6].code);
 
             // 編集画面にデータを渡し、開く
             BCMT0202 dlg = new BCMT0202(row);
@@ -118,10 +111,8 @@ namespace BCMT02.dialog
         // フォームのクロージング確認処理
         private void BCMT0301_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if ( base.CloseFunction(GlobalDefine.MESSAGE_ASK_CLOSE) )
-            {
-                e.Cancel = true;
-            }
+            e.Cancel = base.IsCancelClosing();
         }
+        #endregion
     }
 }

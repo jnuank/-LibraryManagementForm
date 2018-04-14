@@ -222,8 +222,8 @@ namespace BCMT01.dialog
             bool cancelPressed = false;
 
             // 三項演算子…[条件式] ? [trueの場合] : [falseの場合]
-            cancelPressed = valueEqual ? base.CloseFunction(GlobalDefine.MESSAGE_ASK_CLOSE)
-                                       : base.CloseFunction(GlobalDefine.MESSAGE_ASK_CLOSE_CHANGE);
+            cancelPressed = valueEqual ? base.IsCancelClosing(GlobalDefine.MESSAGE_ASK_CLOSE)
+                                       : base.IsCancelClosing(GlobalDefine.MESSAGE_ASK_CLOSE_CHANGE);
 
             if ( cancelPressed )
                 e.Cancel = true;

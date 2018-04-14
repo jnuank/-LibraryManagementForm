@@ -77,7 +77,7 @@ namespace BCMN01.dialog
         /// <param name="e"></param>
         private void BCMN0101_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if ( base.CloseFunction(GlobalDefine.MESSAGE_ASK_CLOSE) )
+            if ( base.IsCancelClosing(GlobalDefine.MESSAGE_ASK_CLOSE) )
             { e.Cancel = true; }
         }
 

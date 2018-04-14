@@ -106,7 +106,7 @@ namespace BCMT03.dialog
         // フォームのクロージング確認処理
         private void BCMT0301_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if ( base.CloseFunction(GlobalDefine.MESSAGE_ASK_CLOSE) )
+            if ( base.IsCancelClosing(GlobalDefine.MESSAGE_ASK_CLOSE) )
                 e.Cancel = true;
         }
     }

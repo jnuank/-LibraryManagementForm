@@ -17,30 +17,37 @@ namespace Common.dialog
         {
             InitializeComponent();
         }
-        
+
         /// <summary>
         /// 閉じる前の確認ダイアログ表示
         /// </summary>
         /// <returns></returns>
-        protected bool CloseFunction(string message)
+        protected bool IsCancelClosing()
         {
-            DialogResult result = MessageBox.Show(message,
-            "質問",
-            MessageBoxButtons.OKCancel,
-            MessageBoxIcon.Exclamation,
-            MessageBoxDefaultButton.Button2);
+            return IsCancelClosing(GlobalDefine.MESSAGE_ASK_CLOSE);
+        }
 
-            bool flag = true;
-            switch ( result )
+        /// <summary>
+        /// 閉じる前の確認ダイアログ表示
+        /// </summary>
+        /// <returns></returns>
+        protected bool IsCancelClosing(string message)
+        {
+            DialogResult dr = MessageBox.Show(message,
+                                                    "質問",
+                                                    MessageBoxButtons.OKCancel,
+                                                    MessageBoxIcon.Exclamation,
+                                                    MessageBoxDefaultButton.Button2);
+
+            if (dr == DialogResult.OK)
             {
-                case DialogResult.OK:
-                    flag = false;
-                    break;
-                case DialogResult.Cancel:
-                    flag = true;
-                    break;
+                return false;
             }
-            return flag;
+            else
+            {
+                return true;
+            }
+
         }
 
         /// <summary>

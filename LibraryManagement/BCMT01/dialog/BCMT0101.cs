@@ -77,8 +77,8 @@ namespace BCMT01.dialog
             DbQuery dc = SingletonObject.GetDbQuery();
 
             // エラーチェック
-            try
-            {
+            //try
+            //{
                 ErrorChecks();
 
                 dataGridView1.Table = dc.SelectManagedBooks(this.txtId.Text, 
@@ -87,13 +87,13 @@ namespace BCMT01.dialog
                                                             cmbCategory2.SelectedValue.ToString(),
                                                             cmbCategory3.SelectedValue.ToString());
 
-            }
-            catch ( InputException ex )
-            {
-                MessageBox.Show(ex.Message);
-                ex.ERROR_TEXTBOX.Clear();
-                ex.ERROR_TEXTBOX.Focus();
-            }
+            //}
+            //catch ( InputException ex )
+            //{
+            //    MessageBox.Show(ex.Message);
+            //    ex.ERROR_TEXTBOX.Clear();
+            //    ex.ERROR_TEXTBOX.Focus();
+            //}
 
             // データグリッドビューの更新
             InitGridView();
@@ -138,7 +138,7 @@ namespace BCMT01.dialog
         /// <param name="e"></param>
         private void BCMT0101_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if ( base.CloseFunction(GlobalDefine.MESSAGE_ASK_CLOSE) )
+            if ( base.IsCancelClosing(GlobalDefine.MESSAGE_ASK_CLOSE) )
                 e.Cancel = true;
         }
 

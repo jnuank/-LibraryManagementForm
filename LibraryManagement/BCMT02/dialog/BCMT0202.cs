@@ -149,7 +149,7 @@ namespace BCMT02.dialog
                 {
                     msg = GlobalDefine.MESSAGE_ASK_CLOSE_CHANGE;
                 }
-                if ( base.CloseFunction(msg) )
+                if ( base.IsCancelClosing(msg) )
                 { e.Cancel = true; }
             }
         }
