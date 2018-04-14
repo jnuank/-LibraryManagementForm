@@ -14,7 +14,6 @@ namespace Common.control
         public CategoryDropDownList()
         {
            // コンストラクタでクエリ流そうとすると、デザイナー上で貼り付けるとエラー起きる
-           //InitControl();
         }
 
         /// <summary>

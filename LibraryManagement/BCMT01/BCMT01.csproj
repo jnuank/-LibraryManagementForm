@@ -78,6 +78,7 @@
     <Compile Include="dialog\BCMT0102.Designer.cs">
       <DependentUpon>BCMT0102.cs</DependentUpon>
     </Compile>
+    <Compile Include="logic\BookManagementLogic.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="dialog\BCMT0101.resx">
