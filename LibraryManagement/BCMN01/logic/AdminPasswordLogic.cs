@@ -11,6 +11,11 @@ namespace BCMN01.logic
 {
     public class AdminPasswordLogic
     {
+        /// <summary>
+        /// 実行ボタンをクリック時のロジック
+        /// </summary>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public string Apply(string password)
         {
             if (string.IsNullOrEmpty(password))
@@ -29,6 +34,5 @@ namespace BCMN01.logic
                 return GlobalDefine.ERROR_CODE[8].message;
             }
         }
-
     }
 }

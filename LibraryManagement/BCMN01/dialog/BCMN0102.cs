@@ -18,20 +18,23 @@ namespace BCMN01.dialog
 
         // 引数なしのデリゲート変数を用意する（オーナーウィンドウ側の操作用）
         public delegate void DelegateFunc();
-        public DelegateFunc menuEnable;
 
         public BCMN0102(Action action)
         {
             InitializeComponent();
+
+            // データバインド
             txtPass.DataBindings.Add("Text", viewModel, "Password");
             btnApply.DataBindings.Add("Enabled", viewModel, "ApplyEnable");
             btnClear.DataBindings.Add("Enabled", viewModel, "ClearEnable");
 
+            // 実行ボタンのイベント登録
             btnApply.Click += viewModel.ApplyButton_Click;
-            //btnApply.Click += this.btnApply_Click;
 
+            // 親画面からのActionメソッドをViewModelのプロパティに渡す
             viewModel.MenuEnableAction = action;
 
+            // Messageプロパティの変更通知があった場合、メッセージボックスを表示する
             viewModel.PropertyChanged += (sender, e) =>
             {
                 if(e.PropertyName == "Message")
