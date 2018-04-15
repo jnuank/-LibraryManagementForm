@@ -54,6 +54,7 @@ namespace BCMT02.dialog
         /// <param name="row">オプション引数。Addモードの時は不要にする</param>
         public void InitDailog(MODE mode, DataRow row = null)
         {
+
             switch ( mode )
             {
                 case MODE.ADD:

@@ -1,23 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Common.dialog;
-using Common.define;
+﻿using BCHT01.dialog;
+using BCLN01.dialog;
 using BCMT01.dialog;
 using BCMT02.dialog;
 using BCMT03.dialog;
 using BCMT04.dialog;
 using BCMT05.dialog;
-using BCSR01.dialog;
-using BCLN01.dialog;
 using BCRT01.dialog;
-using BCHT01.dialog;
+using BCSR01.dialog;
+using Common.define;
+using Common.dialog;
+using System;
+using System.Windows.Forms;
 
 
 namespace BCMN01.dialog
@@ -38,14 +31,9 @@ namespace BCMN01.dialog
         /// <param name="e"></param>
         private void menuAdminPass_Click(object sender, EventArgs e)
         {
-
-            BCMN0102 inputPassForm = new BCMN0102();
-            
             // パスワード入力画面で、正しいパスワードが入力されたら呼ばれる
-            inputPassForm.menuEnable = () => menuAdminTools.Enabled = true;
-            
+            BCMN0102 inputPassForm = new BCMN0102(() => menuAdminTools.Enabled = true);
             inputPassForm.ShowDialog();
-
         }
 
         /// <summary>

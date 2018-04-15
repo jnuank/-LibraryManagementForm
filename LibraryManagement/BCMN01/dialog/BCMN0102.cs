@@ -5,50 +5,44 @@ using Common.singleton;
 using System;
 using System.Windows.Forms;
 using Common.Properties;
+using BCMN01.ViewModel;
 
 namespace BCMN01.dialog
 {
+    /// <summary>
+    /// 管理者パスワード入力画面
+    /// </summary>
     public partial class BCMN0102 : Form
     {
+        private BCMN0102ViewModel viewModel = new BCMN0102ViewModel();
 
         // 引数なしのデリゲート変数を用意する（オーナーウィンドウ側の操作用）
         public delegate void DelegateFunc();
         public DelegateFunc menuEnable;
 
-        public BCMN0102()
+        public BCMN0102(Action action)
         {
             InitializeComponent();
+            txtPass.DataBindings.Add("Text", viewModel, "Password");
+            btnApply.DataBindings.Add("Enabled", viewModel, "ApplyEnable");
+            btnClear.DataBindings.Add("Enabled", viewModel, "ClearEnable");
+
+            btnApply.Click += viewModel.ApplyButton_Click;
+            //btnApply.Click += this.btnApply_Click;
+
+            viewModel.MenuEnableAction = action;
+
+            viewModel.PropertyChanged += (sender, e) =>
+            {
+                if(e.PropertyName == "Message")
+                {
+                    MessageBox.Show(viewModel.Message);
+                }
+            };
+
         }
 
         #region メソッド
-
-        /// <summary>
-        /// 確定ボタンのロジック
-        /// </summary>
-        public void Apply(TextBox textBox)
-        {
-            if (CheckTextBox(textBox.Text))
-            {
-                MessageBox.Show(GlobalDefine.ERROR_CODE[7].message);
-                textBox.Focus();
-                return;
-            }
-
-            DbQuery dc = SingletonObject.GetDbQuery();
-
-            if (dc.IsAdminPassword(textBox.Text))
-            {
-                MessageBox.Show(GlobalDefine.MESSAGE_ADMIN_MODE_ENABLE);
-                menuEnable();
-                this.Close();
-            }
-            else
-            {
-                MessageBox.Show(GlobalDefine.ERROR_CODE[8].message, GlobalDefine.CAUTION);
-                textBox.Clear();
-                textBox.Focus();
-            }
-        }
 
         /// <summary>
         /// チェックボックスに入力されているのが、nullか空文字だったらtrueを返す
@@ -64,17 +58,6 @@ namespace BCMN01.dialog
         #endregion
 
         #region イベント
-        /// <summary>
-        /// 確定ボタン
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnApply_Click(object sender, EventArgs e)
-        {
-            Apply(this.txtPass);
-        }
-
-
         /// <summary>
         /// 閉じるボタン
         /// </summary>
@@ -92,7 +75,8 @@ namespace BCMN01.dialog
         /// <param name="e"></param>
         private void btnClear_Click(object sender, EventArgs e)
         {
-            txtPass.Clear();
+            viewModel.Password = string.Empty;
+            
         }
         #endregion
     }
