@@ -4,67 +4,110 @@
 //     ランタイム バージョン:4.0.30319.42000
 //
 //     このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
-//     コードが再生成されるときに損失したりします
+//     コードが再生成されるときに損失したりします。
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BCMN01.Properties
-{
-
-
+namespace BCMT01.Properties {
+    using System;
+    
+    
     /// <summary>
     ///   ローカライズされた文字列などを検索するための、厳密に型指定されたリソース クラスです。
     /// </summary>
     // このクラスは StronglyTypedResourceBuilder クラスが ResGen
     // または Visual Studio のようなツールを使用して自動生成されました。
     // メンバーを追加または削除するには、.ResX ファイルを編集して、/str オプションと共に
-    // ResGen を実行し直すか、または VS プロジェクトをリビルドします。
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    // ResGen を実行し直すか、または VS プロジェクトをビルドし直します。
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources
-    {
-
+    internal class Resources {
+        
         private static global::System.Resources.ResourceManager resourceMan;
-
+        
         private static global::System.Globalization.CultureInfo resourceCulture;
-
+        
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources()
-        {
+        internal Resources() {
         }
-
+        
         /// <summary>
-        ///   このクラスで使用されるキャッシュされた ResourceManager インスタンスを返します。
+        ///   このクラスで使用されているキャッシュされた ResourceManager インスタンスを返します。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager
-        {
-            get
-            {
-                if ( (resourceMan == null) )
-                {
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("BCMT01.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-
+        
         /// <summary>
         ///   厳密に型指定されたこのリソース クラスを使用して、すべての検索リソースに対し、
         ///   現在のスレッドの CurrentUICulture プロパティをオーバーライドします。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture
-        {
-            get
-            {
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
                 return resourceCulture;
             }
-            set
-            {
+            set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   SELECT  
+        ///    BOOK_ID as &apos;ID&apos;,  
+        ///    BOOK_NAME as &apos;タイトル&apos;,  
+        ///    DIVISION_NAME1 as &apos;分類1&apos;, 
+        ///    DIVISION_NAME2 as &apos;分類2&apos;, 
+        ///    DIVISION_NAME3 as &apos;分類3&apos;, 
+        ///    USER_MASTER.USER_NAME as &apos;入荷者&apos;, 
+        ///    ARRIVAL_DATE as &apos;入荷日&apos;  
+        ///FROM  
+        ///    (SELECT *, BOOK_GENRE_MASTER.DIVISION_NAME as &apos;DIVISION_NAME3&apos;  
+        ///    FROM  
+        ///        (SELECT *, BOOK_GENRE_MASTER.DIVISION_NAME as &apos;DIVISION_NAME2&apos;  
+        ///        FROM  
+        ///            (SELECT *, BOOK_GENRE_MASTER.DIVISION_NAME as &apos;DIVISION_NAME1&apos;  
+        ///            FROM  
+        ///             [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string SelectBCMT0101 {
+            get {
+                return ResourceManager.GetString("SelectBCMT0101", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   AND DIVISION_ID1 = &apos;{0}&apos; に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string SelectBCMT0101_category1 {
+            get {
+                return ResourceManager.GetString("SelectBCMT0101_category1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   AND DIVISION_ID2 = &apos;{0}&apos; に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string SelectBCMT0101_category2 {
+            get {
+                return ResourceManager.GetString("SelectBCMT0101_category2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   AND DIVISION_ID3 = &apos;{0}&apos; に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string SelectBCMT0101_category3 {
+            get {
+                return ResourceManager.GetString("SelectBCMT0101_category3", resourceCulture);
             }
         }
     }

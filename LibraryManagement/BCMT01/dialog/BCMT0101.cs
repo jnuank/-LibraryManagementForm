@@ -1,4 +1,5 @@
-﻿using Common.db;
+﻿using BCMT01.dataset;
+using Common.db;
 using Common.define;
 using Common.dialog;
 using Common.ErrorCheck;
@@ -11,20 +12,6 @@ namespace BCMT01.dialog
 {
     public partial class BCMT0101 : BaseForm
     {
-        /// <summary>
-        /// データグリッドビューに表示するカラム
-        /// </summary>
-        private enum COLUMNS
-        {
-            ID,
-            NAME,
-            DIVISION_ID1,
-            DIVISION_ID2,
-            DIVISION_ID3,
-            ARRIVAL_USER_ID,
-            ARRIVAL_DATE,
-        }
-
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -44,7 +31,6 @@ namespace BCMT01.dialog
             cmbCategory1.InitControl();
             cmbCategory2.InitControl();
             cmbCategory3.InitControl();
-
         }
 
         /// <summary>
@@ -52,19 +38,32 @@ namespace BCMT01.dialog
         /// </summary>
         private void InitGridView()
         {
-            dataGridView1.InitDataSource();
-            dataGridView1.InitControl();
-
-            // 書籍IDセル
-            dataGridView1.Columns[(int)COLUMNS.ID].HeaderText   = GlobalDefine.BOOK_ID;
-            dataGridView1.Columns[(int)COLUMNS.ID].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-
-            // タイトル
-            dataGridView1.Columns[(int)COLUMNS.NAME].HeaderText = GlobalDefine.BOOK_NAME;
-
+            dtGridView.InitControl();
         }
 
-        # region イベント
+        #region イベント
+
+        /// <summary>
+        /// セルダブルクリックのイベント
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dtGridView_CellDubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // 選択された行を取得
+            int nTarget = e.RowIndex;
+
+            // 選択された行を取得
+            DataGridViewRow row = dtGridView.SelectedRow();
+
+            // 編集画面にデータを渡し、開く
+            BCMT0102 dlg = new BCMT0102(row);
+            dlg.ShowDialog();
+
+            // 画面更新
+            InitGridView();
+        }
+
 
         /// <summary>
         /// 検索ボタン
@@ -73,17 +72,25 @@ namespace BCMT01.dialog
         /// <param name="e"></param>
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            DbQuery dc = SingletonObject.GetDbQuery();
-
             ErrorChecks();
 
-            dataGridView1.Table = dc.SelectManagedBooks(this.txtId.Text, 
-                                                        this.txtTitle.Text,
-                                                        cmbCategory1.SelectedValue.ToString(),
-                                                        cmbCategory2.SelectedValue.ToString(),
-                                                        cmbCategory3.SelectedValue.ToString());
+            string query = string.Format(Properties.Resources.SelectBCMT0101, txtId.Text, txtTitle.Text);
 
-            // データグリッドビューの更新
+            if (cmbCategory1.SelectedValue.ToString() != "")
+                query += string.Format(Properties.Resources.SelectBCMT0101_category1, cmbCategory1.SelectedValue.ToString());
+
+            if (cmbCategory2.SelectedValue.ToString() != "")
+                query += string.Format(Properties.Resources.SelectBCMT0101_category2, cmbCategory2.SelectedValue.ToString());
+
+            if (cmbCategory3.SelectedValue.ToString() != "")
+                query += string.Format(Properties.Resources.SelectBCMT0101_category3, cmbCategory3.SelectedValue.ToString());
+
+            var dba = SingletonObject.GetDbAdapter();
+
+            var table = dba.ExecSQL<BookMaster.ViewTableDataTable>(query);
+
+            dtGridView.SetDataSource(table);
+
             InitGridView();
         }
 
@@ -141,7 +148,7 @@ namespace BCMT01.dialog
             int nTarget = e.RowIndex;
 
             // 選択された行を取得
-            DataRow row = dataGridView1.Table.Rows[nTarget];
+            DataGridViewRow row = dtGridView.SelectedRow();
 
             // 編集画面にデータを渡し、開く
             BCMT0102 dlg = new BCMT0102(row);
@@ -157,8 +164,7 @@ namespace BCMT01.dialog
         /// </summary>
         private void ClearResult()
         {
-            dataGridView1.Table.Clear();
-            InitGridView();
+            dtGridView.Clear();
         }
 
         /// <summary>
@@ -181,6 +187,5 @@ namespace BCMT01.dialog
             InputCheck.IsSingleQuotation(this.txtId);
             InputCheck.IsSingleQuotation(this.txtTitle);
         }
-
     }
 }

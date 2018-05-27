@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BCCM01.dataset;
+using System;
 using System.Windows.Forms;
-using BCCM01.dataset;
+using Common.control;
 
 namespace BCCM01.dialog
 {
@@ -33,12 +27,15 @@ namespace BCCM01.dialog
         {
             USER_ID,
             USER_NAME,
-            COMPANY_ID,
-            USER_MAILADDRESS,
-            RETIREMENT_FLAG,
-            MODIFY_FLAG,
+            COMPANY_ABBREVIATION,
         }
 
+        private string[] columnName =
+        {
+            "ユーザID",
+            "ユーザ名",
+            "会社略称",
+        };
         /// <summary>
         /// データソースの設定
         /// </summary>
@@ -46,11 +43,12 @@ namespace BCCM01.dialog
         public void SetDataSource(UserDataSet.ViewUserMasterDataTable dataSource)
         {
             this.dataSource = dataSource;
+
             binding.DataSource = this.dataSource;
             binding.DataMember = string.Empty;
+
             dataGridView.DataSource = binding;
             binding.ResetBindings(false);
-//            dataGridView.DataSource = dataSource;
         }
 
         /// <summary>
@@ -59,6 +57,19 @@ namespace BCCM01.dialog
         public void InitControl()
         {
             dataGridView.InitControl();
+
+            InitHeaderText();
+        }
+
+        /// <summary>
+        /// カラム名を変更する
+        /// </summary>
+        public void InitHeaderText()
+        {
+            for(int index = 0; index < columnName.Length; index++)
+            {
+                dataGridView.Columns[index].HeaderText = columnName[index];
+            }
         }
 
         /// <summary>
@@ -97,21 +108,16 @@ namespace BCCM01.dialog
             binding.ResetBindings(false);
         }
 
-        /// <summary>
-        /// ユーザコントロールのサイズにDataGridViewを合わせる
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void UserDataGridView_Resize(object sender, EventArgs e)
-        {
-            dataGridView.Height = this.Height-10;
-            dataGridView.Width  = this.Width-10;
-        }
-
         // ソートイベントが発生した時に、呼ぶ
         private void dataGridView_Sorted(object sender, EventArgs e)
         {
             MessageBox.Show("test");
+        }
+
+        private void UserDataGridView_Resize(object sender, EventArgs e)
+        {
+            dataGridView.Height = this.Height;
+            dataGridView.Width  = this.Width;
         }
     }
 }

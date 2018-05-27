@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Common.define
 {
-    public enum COLUMNS
+    public enum COLUMNSCOMMON
     {
         ID,
         NAME,

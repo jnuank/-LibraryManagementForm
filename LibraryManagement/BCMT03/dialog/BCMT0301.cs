@@ -51,15 +51,15 @@ namespace BCMT03.dialog
             dataGridView1.InitControl();
 
             // 会社IDセル
-            dataGridView1.Columns[(int)COLUMNS.ID].HeaderText = GlobalDefine.COMPANY_ID;
-            dataGridView1.Columns[(int)COLUMNS.ID].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridView1.Columns[(int)COLUMNS.ID].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView1.Columns[(int)COLUMNSCOMMON.ID].HeaderText = GlobalDefine.COMPANY_ID;
+            dataGridView1.Columns[(int)COLUMNSCOMMON.ID].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView1.Columns[(int)COLUMNSCOMMON.ID].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             
             // 会社名
-            dataGridView1.Columns[(int)COLUMNS.NAME].HeaderText = GlobalDefine.COMPANY_NAME;
+            dataGridView1.Columns[(int)COLUMNSCOMMON.NAME].HeaderText = GlobalDefine.COMPANY_NAME;
 
             // 会社略称
-            dataGridView1.Columns[(int)COLUMNS.ABBREVIATION].HeaderText = GlobalDefine.COMPANY_ABBREVIATION;
+            dataGridView1.Columns[(int)COLUMNSCOMMON.ABBREVIATION].HeaderText = GlobalDefine.COMPANY_ABBREVIATION;
         }
 
         // 新規作成ボタン

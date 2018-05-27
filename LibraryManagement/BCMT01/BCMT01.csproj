@@ -66,6 +66,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="dataset\BookMaster.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BookMaster.xsd</DependentUpon>
+    </Compile>
     <Compile Include="dialog\BCMT0101.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +83,12 @@
     <Compile Include="dialog\BCMT0102.Designer.cs">
       <DependentUpon>BCMT0102.cs</DependentUpon>
     </Compile>
+    <Compile Include="dialog\BookMasterDataGridView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="dialog\BookMasterDataGridView.Designer.cs">
+      <DependentUpon>BookMasterDataGridView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="dialog\BCMT0101.resx">
@@ -85,6 +96,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dialog\BCMT0102.resx">
       <DependentUpon>BCMT0102.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialog\BookMasterDataGridView.resx">
+      <DependentUpon>BookMasterDataGridView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -94,7 +108,19 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="dataset\BookMaster.xsc">
+      <DependentUpon>BookMaster.xsd</DependentUpon>
+    </None>
+    <None Include="dataset\BookMaster.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BookMaster.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dataset\BookMaster.xss">
+      <DependentUpon>BookMaster.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -109,7 +135,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\selectbcmt0101.sql" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BCCM01\BCCM01.csproj">
       <Project>{a5c3ba11-3ff9-4e0b-9a7e-f7ded777acba}</Project>
@@ -119,6 +147,15 @@
       <Project>{bece5653-4e5a-49e8-a9d2-0a97ac86acfc}</Project>
       <Name>Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\selectbcmt0101_category1.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\selectbcmt0101_category2.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\selectbcmt0101_category3.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.108.0\build\net451\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.108.0\build\net451\System.Data.SQLite.Core.targets')" />

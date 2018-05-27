@@ -38,7 +38,6 @@ namespace BCCM01.dialog
         {
             InitializeComponent();
             InitDialog();
-            InitGridView();
         }
 
         /// <summary>

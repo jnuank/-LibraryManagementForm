@@ -8,12 +8,14 @@ using Common.singleton;
 using Common.ErrorCheck;
 using Common.exception;
 using BCCM01.dialog;
+using static BCMT01.dialog.BookMasterDataGridView;
 
 
 namespace BCMT01.dialog
 {
     public partial class BCMT0102 : BaseForm
     {
+    
         #region フィールド
 
         // 【編集時】初期値保存用
@@ -49,29 +51,29 @@ namespace BCMT01.dialog
         /// 編集用コンストラクタ
         /// </summary>
         /// <param name="row"></param>
-        public BCMT0102(DataRow row)
+        public BCMT0102(DataGridViewRow row)
         {
             mode = MODE.MOD;
 
             InitializeComponent();
             InitDialog();
 
-            this.txtId.Text         = row.Field<string>(GlobalDefine.BOOK_ID);
+            this.txtId.Text = row.Cells[(int)COLUMNS.BOOK_ID].Value.ToString();
             this.txtId.ReadOnly     = true;
-            this.txtTitle.Text      = row.Field<string>(GlobalDefine.BOOK_NAME);
+            this.txtTitle.Text      = row.Cells[(int)COLUMNS.BOOK_NAME].Value.ToString();
 
-            // グリッドビューからは分類名しか取れない為、分類名→分類IDを取得して、コンボボックスにID突っ込む。
-            string categoryId1 = GetCategoryId(row.Field<string>(GlobalDefine.DIVISION_ID1));
-            string categoryId2 = GetCategoryId(row.Field<string>(GlobalDefine.DIVISION_ID2));
-            string categoryId3 = GetCategoryId(row.Field<string>(GlobalDefine.DIVISION_ID3));
+            // グリッドビューからは   分類名しか取れない為、分類名→分類IDを取得して、コンボボックスにID突っ込む。
+            string categoryId1 = GetCategoryId(row.Cells[(int)COLUMNS.DIVISION_NAME1].Value.ToString());
+            string categoryId2 = GetCategoryId(row.Cells[(int)COLUMNS.DIVISION_NAME2].Value.ToString());
+            string categoryId3 = GetCategoryId(row.Cells[(int)COLUMNS.DIVISION_NAME3].Value.ToString());
 
             // nullだった場合には、コンボボックスの初期状態を表示
             this.cmbCategory1.SelectedValue = categoryId1 ?? "";
             this.cmbCategory2.SelectedValue = categoryId2 ?? "";
             this.cmbCategory3.SelectedValue = categoryId3 ?? "";
 
-            this.txtUserName.Text  = row.Field<string>(GlobalDefine.ARRIVAL_USER);
-            this.dateArrival.Value = row.Field<DateTime>(GlobalDefine.ARRIVAL_DATE);
+            this.txtUserName.Text  = row.Cells[(int)COLUMNS.ARRIVAL_USER_NAME].Value.ToString();
+            this.dateArrival.Value = DateTime.Parse(row.Cells[(int)COLUMNS.ARRIVAL_DATE].Value.ToString());
             
             this.userId = GetUserId(this.txtUserName.Text);
 
