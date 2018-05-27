@@ -66,16 +66,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="dataset\UserDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="dialog\BCCM0101.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dialog\BCCM0101.Designer.cs">
       <DependentUpon>BCCM0101.cs</DependentUpon>
     </Compile>
+    <Compile Include="dialog\UserDataGridView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="dialog\UserDataGridView.Designer.cs">
+      <DependentUpon>UserDataGridView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="dialog\BCCM0101.resx">
       <DependentUpon>BCCM0101.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialog\UserDataGridView.resx">
+      <DependentUpon>UserDataGridView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -86,6 +100,17 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="dataset\UserDataSet.xsc">
+      <DependentUpon>UserDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="dataset\UserDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>UserDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dataset\UserDataSet.xss">
+      <DependentUpon>UserDataSet.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

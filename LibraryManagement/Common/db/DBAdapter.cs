@@ -76,7 +76,7 @@ namespace Common.db
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        public DataTable execSQL(String query)
+        public DataTable ExecSQL(String query)
         {
             DataTable dt = new DataTable();
 
@@ -85,6 +85,23 @@ namespace Common.db
             {
                 // DataTableに設定する為、SQLiteDataAdapterを使用する
                 using ( SQLiteDataAdapter adapter = new SQLiteDataAdapter(query, connecion) )
+                {
+                    // Open/Closeはこの関数が自動的にやってくれる為、記述不要
+                    adapter.Fill(dt);
+                }
+            }
+            return dt;
+        }
+
+        public T ExecSQL<T>(String query) where T: DataTable, new()
+        {
+            T dt = new T();
+
+            // DBコネクション設定
+            using (SQLiteConnection connecion = new SQLiteConnection("Data Source=" + db_file))
+            {
+                // DataTableに設定する為、SQLiteDataAdapterを使用する
+                using (SQLiteDataAdapter adapter = new SQLiteDataAdapter(query, connecion))
                 {
                     // Open/Closeはこの関数が自動的にやってくれる為、記述不要
                     adapter.Fill(dt);

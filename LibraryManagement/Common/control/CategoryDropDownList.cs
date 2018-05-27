@@ -29,7 +29,7 @@ namespace Common.control
 
             string query = "SELECT * FROM BOOK_GENRE_MASTER";
 
-            DataTable dt1 = dba.execSQL(query);
+            DataTable dt1 = dba.ExecSQL(query);
             DataRow dr = dt1.NewRow();
             dr["DIVISION_ID"] = "";
             dr["DIVISION_NAME"] = "";

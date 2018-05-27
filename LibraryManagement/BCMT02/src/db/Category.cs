@@ -16,7 +16,7 @@ namespace BCMT02.src.db
 
             string query = "SELECT * FROM BOOK_GENRE_MASTER;";
 
-            dt = SingletonObject.GetDbAdapter().execSQL(query);
+            dt = SingletonObject.GetDbAdapter().ExecSQL(query);
 
             return dt;
         }

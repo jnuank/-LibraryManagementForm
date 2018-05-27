@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="UserDataSet" targetNamespace="http://tempuri.org/UserDataSet.xsd" xmlns:mstns="http://tempuri.org/UserDataSet.xsd" xmlns="http://tempuri.org/UserDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="UserDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="UserDataSet" msprop:Generator_UserDSName="UserDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="UserMaster" msprop:Generator_TableClassName="UserMasterDataTable" msprop:Generator_TableVarName="tableUserMaster" msprop:Generator_RowChangedName="UserMasterRowChanged" msprop:Generator_TablePropName="UserMaster" msprop:Generator_RowDeletingName="UserMasterRowDeleting" msprop:Generator_RowChangingName="UserMasterRowChanging" msprop:Generator_RowEvHandlerName="UserMasterRowChangeEventHandler" msprop:Generator_RowDeletedName="UserMasterRowDeleted" msprop:Generator_RowClassName="UserMasterRow" msprop:Generator_UserTableName="UserMaster" msprop:Generator_RowEvArgName="UserMasterRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="USER_ID" msprop:Generator_ColumnVarNameInTable="columnUSER_ID" msprop:Generator_ColumnPropNameInRow="USER_ID" msprop:Generator_ColumnPropNameInTable="USER_IDColumn" msprop:Generator_UserColumnName="USER_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="USER_NAME" msprop:Generator_ColumnVarNameInTable="columnUSER_NAME" msprop:Generator_ColumnPropNameInRow="USER_NAME" msprop:Generator_ColumnPropNameInTable="USER_NAMEColumn" msprop:Generator_UserColumnName="USER_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="COMPANY_ID" msprop:Generator_ColumnVarNameInTable="columnCOMPANY_ID" msprop:Generator_ColumnPropNameInRow="COMPANY_ID" msprop:Generator_ColumnPropNameInTable="COMPANY_IDColumn" msprop:Generator_UserColumnName="COMPANY_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="USER_MAILADDRESS" msprop:Generator_ColumnVarNameInTable="columnUSER_MAILADDRESS" msprop:Generator_ColumnPropNameInRow="USER_MAILADDRESS" msprop:Generator_ColumnPropNameInTable="USER_MAILADDRESSColumn" msprop:Generator_UserColumnName="USER_MAILADDRESS" type="xs:string" minOccurs="0" />
+              <xs:element name="RETIREMENT_FLAG" msprop:Generator_ColumnVarNameInTable="columnRETIREMENT_FLAG" msprop:Generator_ColumnPropNameInRow="RETIREMENT_FLAG" msprop:Generator_ColumnPropNameInTable="RETIREMENT_FLAGColumn" msprop:Generator_UserColumnName="RETIREMENT_FLAG" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ViewUserMaster" msprop:Generator_TableClassName="ViewUserMasterDataTable" msprop:Generator_TableVarName="tableViewUserMaster" msprop:Generator_RowChangedName="ViewUserMasterRowChanged" msprop:Generator_TablePropName="ViewUserMaster" msprop:Generator_RowDeletingName="ViewUserMasterRowDeleting" msprop:Generator_RowChangingName="ViewUserMasterRowChanging" msprop:Generator_RowEvHandlerName="ViewUserMasterRowChangeEventHandler" msprop:Generator_RowDeletedName="ViewUserMasterRowDeleted" msprop:Generator_RowClassName="ViewUserMasterRow" msprop:Generator_UserTableName="ViewUserMaster" msprop:Generator_RowEvArgName="ViewUserMasterRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="USER_ID" msprop:Generator_ColumnVarNameInTable="columnUSER_ID" msprop:Generator_ColumnPropNameInRow="USER_ID" msprop:Generator_ColumnPropNameInTable="USER_IDColumn" msprop:Generator_UserColumnName="USER_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="USER_NAME" msprop:Generator_ColumnVarNameInTable="columnUSER_NAME" msprop:Generator_ColumnPropNameInRow="USER_NAME" msprop:Generator_ColumnPropNameInTable="USER_NAMEColumn" msprop:Generator_UserColumnName="USER_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="COMPANY_ABBREVIATION" msprop:Generator_ColumnVarNameInTable="columnCOMPANY_ABBREVIATION" msprop:Generator_ColumnPropNameInRow="COMPANY_ABBREVIATION" msprop:Generator_ColumnPropNameInTable="COMPANY_ABBREVIATIONColumn" msprop:Generator_UserColumnName="COMPANY_ABBREVIATION" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

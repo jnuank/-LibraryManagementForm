@@ -51,7 +51,7 @@ namespace Common.db
                 query += string.Format(Properties.Resources.SelectBCMT0101_category3, selectedValue3);
             }
 
-            return dba.execSQL(query);
+            return dba.ExecSQL(query);
 
         }
 

@@ -103,6 +103,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="singleton\SingletonObject.cs" />
+    <EmbeddedResource Include="control\DataGridViewCustom.resx">
+      <DependentUpon>DataGridViewCustom.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dialog\BaseForm.resx">
       <DependentUpon>BaseForm.cs</DependentUpon>
     </EmbeddedResource>

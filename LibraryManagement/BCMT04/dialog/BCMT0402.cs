@@ -68,7 +68,7 @@ namespace BCMT04.dialog
 
             string query = "SELECT * FROM COMPANY_MASTER";
 
-            cmbCompany.DataSource = dba.execSQL(query);
+            cmbCompany.DataSource = dba.ExecSQL(query);
 
             // 実際に表示するのは会社略称
             cmbCompany.DisplayMember = "COMPANY_ABBREVIATION";

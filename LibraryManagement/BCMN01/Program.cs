@@ -17,6 +17,7 @@ namespace BCMN01
         [STAThread]
         static void Main()
         {
+            // 基本的なExceptionハンドラを登録する
             Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(ExceptionHandler.ApplicationThreadException);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

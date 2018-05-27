@@ -39,7 +39,7 @@ namespace BCSR01.dialog
 
             DBAdapter dba = SingletonObject.GetDbAdapter();
             string query = BaseQuery();
-            dataTable = dba.execSQL(query);
+            dataTable = dba.ExecSQL(query);
 
             InitGridView();
         }
@@ -57,9 +57,9 @@ namespace BCSR01.dialog
 
             string query = "SELECT * FROM BOOK_GENRE_MASTER";
 
-            cmbCategory1.DataSource = dba.execSQL(query);
-            cmbCategory2.DataSource = dba.execSQL(query);
-            cmbCategory3.DataSource = dba.execSQL(query);
+            cmbCategory1.DataSource = dba.ExecSQL(query);
+            cmbCategory2.DataSource = dba.ExecSQL(query);
+            cmbCategory3.DataSource = dba.ExecSQL(query);
 
             cmbCategory1.DisplayMember = "DIVISION_NAME";
             cmbCategory1.ValueMember = "DIVISION_ID";
@@ -337,7 +337,7 @@ namespace BCSR01.dialog
                 query += string.Format("AND LENDING_STATUS = 1");
             }
 
-            dataTable = dba.execSQL(query);
+            dataTable = dba.ExecSQL(query);
         }
 
 

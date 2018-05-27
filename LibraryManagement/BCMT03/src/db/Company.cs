@@ -16,7 +16,7 @@ namespace BCMT03.src.db
 
             string query = "SELECT * FROM COMPANY_MASTER;";
 
-            dt = SingletonObject.GetDbAdapter().execSQL(query);
+            dt = SingletonObject.GetDbAdapter().ExecSQL(query);
 
             return dt;
         }

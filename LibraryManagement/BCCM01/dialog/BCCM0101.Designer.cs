@@ -37,9 +37,8 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnApply = new System.Windows.Forms.Button();
-            this.dataGridView1 = new Common.control.DataGridViewCustom();
+            this.dtGridView = new BCCM01.dialog.UserDataGridView();
             this.groupSearch.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupSearch
@@ -48,9 +47,11 @@
             this.groupSearch.Controls.Add(this.lblCompany);
             this.groupSearch.Controls.Add(this.lblUser);
             this.groupSearch.Controls.Add(this.textUser);
-            this.groupSearch.Location = new System.Drawing.Point(12, 12);
+            this.groupSearch.Location = new System.Drawing.Point(16, 15);
+            this.groupSearch.Margin = new System.Windows.Forms.Padding(4);
             this.groupSearch.Name = "groupSearch";
-            this.groupSearch.Size = new System.Drawing.Size(232, 114);
+            this.groupSearch.Padding = new System.Windows.Forms.Padding(4);
+            this.groupSearch.Size = new System.Drawing.Size(309, 142);
             this.groupSearch.TabIndex = 0;
             this.groupSearch.TabStop = false;
             this.groupSearch.Text = "検索条件";
@@ -59,41 +60,46 @@
             // 
             this.cmbCompany.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCompany.FormattingEnabled = true;
-            this.cmbCompany.Location = new System.Drawing.Point(65, 61);
+            this.cmbCompany.Location = new System.Drawing.Point(87, 76);
+            this.cmbCompany.Margin = new System.Windows.Forms.Padding(4);
             this.cmbCompany.Name = "cmbCompany";
-            this.cmbCompany.Size = new System.Drawing.Size(121, 20);
+            this.cmbCompany.Size = new System.Drawing.Size(160, 23);
             this.cmbCompany.TabIndex = 1;
             // 
             // lblCompany
             // 
             this.lblCompany.AutoSize = true;
-            this.lblCompany.Location = new System.Drawing.Point(6, 64);
+            this.lblCompany.Location = new System.Drawing.Point(8, 80);
+            this.lblCompany.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCompany.Name = "lblCompany";
-            this.lblCompany.Size = new System.Drawing.Size(53, 12);
+            this.lblCompany.Size = new System.Drawing.Size(67, 15);
             this.lblCompany.TabIndex = 6;
             this.lblCompany.Text = "所属会社";
             // 
             // lblUser
             // 
             this.lblUser.AutoSize = true;
-            this.lblUser.Location = new System.Drawing.Point(9, 28);
+            this.lblUser.Location = new System.Drawing.Point(12, 35);
+            this.lblUser.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblUser.Name = "lblUser";
-            this.lblUser.Size = new System.Drawing.Size(47, 12);
+            this.lblUser.Size = new System.Drawing.Size(58, 15);
             this.lblUser.TabIndex = 7;
             this.lblUser.Text = "ユーザ名";
             // 
             // textUser
             // 
-            this.textUser.Location = new System.Drawing.Point(65, 25);
+            this.textUser.Location = new System.Drawing.Point(87, 31);
+            this.textUser.Margin = new System.Windows.Forms.Padding(4);
             this.textUser.Name = "textUser";
-            this.textUser.Size = new System.Drawing.Size(121, 19);
+            this.textUser.Size = new System.Drawing.Size(160, 22);
             this.textUser.TabIndex = 0;
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(401, 103);
+            this.btnClear.Location = new System.Drawing.Point(535, 129);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(4);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.Size = new System.Drawing.Size(100, 29);
             this.btnClear.TabIndex = 2;
             this.btnClear.Text = "クリア";
             this.btnClear.UseVisualStyleBackColor = true;
@@ -101,9 +107,10 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(307, 103);
+            this.btnSearch.Location = new System.Drawing.Point(409, 129);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(4);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnSearch.Size = new System.Drawing.Size(100, 29);
             this.btnSearch.TabIndex = 1;
             this.btnSearch.Text = "検索";
             this.btnSearch.UseVisualStyleBackColor = true;
@@ -111,9 +118,10 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(401, 309);
+            this.btnCancel.Location = new System.Drawing.Point(535, 386);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(100, 29);
             this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "キャンセル";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -121,47 +129,39 @@
             // 
             // btnApply
             // 
-            this.btnApply.Location = new System.Drawing.Point(307, 309);
+            this.btnApply.Location = new System.Drawing.Point(409, 386);
+            this.btnApply.Margin = new System.Windows.Forms.Padding(4);
             this.btnApply.Name = "btnApply";
-            this.btnApply.Size = new System.Drawing.Size(75, 23);
+            this.btnApply.Size = new System.Drawing.Size(100, 29);
             this.btnApply.TabIndex = 4;
             this.btnApply.Text = "選択";
             this.btnApply.UseVisualStyleBackColor = true;
             this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
             // 
-            // dataGridView1
+            // dtGridView
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 132);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowTemplate.Height = 21;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(464, 171);
-            this.dataGridView1.StandardTab = true;
-            this.dataGridView1.TabIndex = 3;
-            this.dataGridView1.TabStop = false;
+            this.dtGridView.Location = new System.Drawing.Point(16, 175);
+            this.dtGridView.Name = "dtGridView";
+            this.dtGridView.Size = new System.Drawing.Size(619, 204);
+            this.dtGridView.TabIndex = 6;
             // 
             // BCCM0101
             // 
             this.AcceptButton = this.btnSearch;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(497, 341);
-            this.Controls.Add(this.dataGridView1);
+            this.ClientSize = new System.Drawing.Size(663, 426);
+            this.Controls.Add(this.dtGridView);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnApply);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.groupSearch);
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "BCCM0101";
             this.Text = "ユーザ検索画面";
             this.groupSearch.ResumeLayout(false);
             this.groupSearch.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -177,6 +177,6 @@
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnApply;
-        private Common.control.DataGridViewCustom dataGridView1;
+        private UserDataGridView dtGridView;
     }
 }

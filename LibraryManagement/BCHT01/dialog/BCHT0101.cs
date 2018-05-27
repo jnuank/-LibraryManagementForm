@@ -471,7 +471,7 @@ namespace BCHT01.dialog
             query += string.Format(" GROUP BY table2.BOOK_ID ");
 
             DBAdapter dba = SingletonObject.GetDbAdapter();
-            dataGridView1.Table = dba.execSQL(query);
+            dataGridView1.Table = dba.ExecSQL(query);
 
             InitGridView();
 
@@ -523,7 +523,7 @@ namespace BCHT01.dialog
                                          startDate,endDate);
             
             DBAdapter dba = SingletonObject.GetDbAdapter();
-            dataGridView1.Table = dba.execSQL(query);
+            dataGridView1.Table = dba.ExecSQL(query);
 
             InitGridView();
         }
@@ -572,7 +572,7 @@ namespace BCHT01.dialog
                                           startDate, endDate);
 
             DBAdapter dba = SingletonObject.GetDbAdapter();
-            dataGridView1.Table = dba.execSQL(query);
+            dataGridView1.Table = dba.ExecSQL(query);
 
             InitGridView();
         }

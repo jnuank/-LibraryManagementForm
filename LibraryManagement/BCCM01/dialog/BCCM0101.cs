@@ -1,4 +1,5 @@
-﻿using Common.db;
+﻿using BCCM01.dataset;
+using Common.db;
 using Common.define;
 using Common.dialog;
 using Common.ErrorCheck;
@@ -28,6 +29,7 @@ namespace BCCM01.dialog
 
         #endregion
 
+        #region コンストラクタ
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -46,27 +48,30 @@ namespace BCCM01.dialog
         {
             this.applyFunc = func;
         }
+        #endregion
 
+        #region 初期化
         /// <summary>
         /// 画面の初期化
         /// </summary>
         private void InitDialog()
         {
-            string query = "SELECT * FROM COMPANY_MASTER";
+            InitComboBox();
 
-            DBAdapter dba = SingletonObject.GetDbAdapter();
-            cmbCompany.DataSource = dba.execSQL(query);
-
-            #region ここ直したい
-            // 実際に表示するのは会社略称
-            cmbCompany.DisplayMember = "COMPANY_ABBREVIATION";
-            // 内部的に渡すのは、会社ID
-            cmbCompany.ValueMember = "COMPANY_ID";
-            #endregion
-
-            // ロード時は無効
             btnApply.Enabled = false;
+        }
 
+        /// <summary>
+        /// コンボボックスの初期化
+        /// </summary>
+        private void InitComboBox()
+        {
+            string query  = "SELECT * FROM COMPANY_MASTER";
+            DBAdapter dba = SingletonObject.GetDbAdapter();
+
+            cmbCompany.DataSource    = dba.ExecSQL(query);
+            cmbCompany.DisplayMember = "COMPANY_ABBREVIATION";
+            cmbCompany.ValueMember   = "COMPANY_ID";
         }
 
         /// <summary>
@@ -74,11 +79,9 @@ namespace BCCM01.dialog
         /// </summary>
         private void InitGridView()
         {
-            // データソースの設定をする
-            dataGridView1.InitDataSource();
-            // コントロールの初期化
-            dataGridView1.InitControl();
+            dtGridView.InitControl();
         }
+        #endregion
 
         #region イベント
 
@@ -108,6 +111,7 @@ namespace BCCM01.dialog
                 MessageBox.Show(ex.Message);
                 if ( ex.ERROR_CODE == COMPANY_NO_SELECTED )
                     return;
+
                 ex.ERROR_TEXTBOX.Clear();
                 ex.ERROR_TEXTBOX.Focus();
 
@@ -118,9 +122,9 @@ namespace BCCM01.dialog
             DBAdapter dba = SingletonObject.GetDbAdapter();
 
             string query = string.Format("SELECT " +
-                                            "USER_ID as 'ユーザID', " +
-                                            "USER_NAME as 'ユーザ名', " +
-                                            "COMPANY_ABBREVIATION as '所属会社' " +
+                                            "USER_ID , " +
+                                            "USER_NAME, " +
+                                            "COMPANY_ABBREVIATION " +
                                          "FROM " +
                                             "USER_MASTER " +
                                          "LEFT OUTER JOIN " +
@@ -132,12 +136,13 @@ namespace BCCM01.dialog
                                             "AND USER_MASTER.COMPANY_ID = '{1}'",
                                             textUser.Text,cmbCompany.SelectedValue);
 
-            dataGridView1.Table = dba.execSQL(query);
+            var table = dba.ExecSQL<UserDataSet.ViewUserMasterDataTable>(query);
+
+            dtGridView.SetDataSource(table);
 
             InitGridView();
 
-            SearchBoxEnable(false);
-
+            SearchMode(false);
         }
 
         /// <summary>
@@ -148,11 +153,10 @@ namespace BCCM01.dialog
         private void btnClear_Click(object sender, EventArgs e)
         {
             SearchBoxClear();
-            dataGridView1.Table.Clear();
-
+            dtGridView.Clear();
             InitGridView();
 
-            SearchBoxEnable(true);
+            SearchMode(true);
         }
 
         /// <summary>
@@ -165,8 +169,8 @@ namespace BCCM01.dialog
             // チェック処理
             ApplyBtnCheckes();
 
-            // 反映開始
-            applyFunc(dataGridView1.CurrentRow.Cells[0].Value.ToString(), dataGridView1.CurrentRow.Cells[1].Value.ToString());
+            // 呼び出し元に反映させる
+            applyFunc(dtGridView.SelectedUserId(), dtGridView.SelectedUserName());
 
             base.Close();
         }
@@ -180,7 +184,6 @@ namespace BCCM01.dialog
         /// </summary>
         private void SearchInputChecks()
         {
-           　
             if(cmbCompany.SelectedIndex <= 0) // ←なぜ0「以下」
                 throw new InputException(GlobalDefine.ERROR_CODE[15].message, GlobalDefine.ERROR_CODE[15].code);
 
@@ -201,7 +204,7 @@ namespace BCCM01.dialog
         /// </summary>
         private void ApplyBtnCheckes()
         {
-            if ( dataGridView1.SelectedCells == null )
+            if (!dtGridView.IsValidSelectedCells())
                 throw new InputException(GlobalDefine.ERROR_CODE[16].message, GlobalDefine.ERROR_CODE[16].code);
         }
         #endregion
@@ -210,13 +213,13 @@ namespace BCCM01.dialog
         /// <summary>
         /// 検索条件フィールドの有効/無効化
         /// </summary>
-        /// <param name="flag"></param>
-        private void SearchBoxEnable(bool flag)
+        /// <param name="enable"></param>
+        private void SearchMode(bool enable)
         {
-            textUser.Enabled   = flag;
-            cmbCompany.Enabled = flag;
-            btnSearch.Enabled  = flag;
-            btnApply.Enabled   = !(flag);
+            textUser.Enabled   = enable;
+            cmbCompany.Enabled = enable;
+            btnSearch.Enabled  = enable;
+            btnApply.Enabled   = !(enable);
         }
 
         /// <summary>

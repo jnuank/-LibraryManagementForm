@@ -21,7 +21,7 @@ namespace Common.control
         /// </summary>
         public DataGridViewCustom()
         {
-            this.Table = SingletonObject.GetMemberList();
+            //this.Table = SingletonObject.GetMemberList();
             this.InitControl();
             this.InitDataSource();
         }
@@ -58,7 +58,7 @@ namespace Common.control
         /// </summary>
         public void InitDataSource()
         {
-            this.DataSource = this.Table;
+//            this.DataSource = this.Table;
         }
 
         #endregion
@@ -86,14 +86,15 @@ namespace Common.control
         /// ソート時イベント
         /// </summary>
         /// <param name="e"></param>
-        protected override void OnSorted(EventArgs e)
-        {
-            DataView dv = this.Table.DefaultView;
-            this.Table = dv.ToTable();
+        //protected override void OnSorted(EventArgs e)
+        //{
+        //    //DataView dv = this.Table.DefaultView;
+        //    //this.Table = dv.ToTable();
 
-            // 登録されているイベントを実施
-            base.OnSorted(e);
-        }
+        //    // 登録されているイベントを実施
+        //    base.OnSorted(e);
+            
+        //}
 
         #endregion
     }
