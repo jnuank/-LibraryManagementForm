@@ -148,8 +148,7 @@ namespace BCSR01.dialog
         /// </summary>
         private void ClearResult()
         {
-            dataTable.Clear();
-            InitGridView();
+            dtGridView.Clear();
         }
 
         /// <summary>
@@ -248,16 +247,16 @@ namespace BCSR01.dialog
         /// <summary>
         /// 検索条件フィールドの有効化
         /// </summary>
-        /// <param name="flag"></param>
-        private void SearchBoxEnable(bool flag)
+        /// <param name="enable"></param>
+        private void SearchBoxEnable(bool enable)
         {
-            this.txtId.Enabled        = flag;
-            this.txtTitle.Enabled     = flag;
-            this.cmbCategory1.Enabled = flag;
-            this.cmbCategory2.Enabled = flag;
-            this.cmbCategory3.Enabled = flag;
-            this.chkLending.Enabled   = flag;
-            this.btnSearch.Enabled    = flag;
+            this.txtId.Enabled        = enable;
+            this.txtTitle.Enabled     = enable;
+            this.cmbCategory1.Enabled = enable;
+            this.cmbCategory2.Enabled = enable;
+            this.cmbCategory3.Enabled = enable;
+            this.chkLending.Enabled   = enable;
+            this.btnSearch.Enabled    = enable;
         }
 
         /// <summary>

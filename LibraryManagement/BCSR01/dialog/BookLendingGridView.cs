@@ -78,7 +78,9 @@ namespace BCSR01.dialog
 
         public void Clear()
         {
-            binding.Clear();
+            source.Clear();
+            binding.ResetBindings(false);
+
         }
 
         /// <summary>
