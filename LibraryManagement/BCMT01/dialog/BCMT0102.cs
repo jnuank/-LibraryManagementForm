@@ -272,7 +272,6 @@ namespace BCMT01.dialog
 
             if ( string.IsNullOrEmpty(this.txtTitle.Text) )
                 throw new InputException(GlobalDefine.ERROR_CODE[23].message, GlobalDefine.ERROR_CODE[23].code, this.txtTitle);
-
         }
 
         #endregion

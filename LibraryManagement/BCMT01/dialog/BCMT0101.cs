@@ -5,7 +5,6 @@ using Common.dialog;
 using Common.ErrorCheck;
 using Common.singleton;
 using System;
-using System.Data;
 using System.Windows.Forms;
 
 namespace BCMT01.dialog
@@ -61,7 +60,8 @@ namespace BCMT01.dialog
             dlg.ShowDialog();
 
             // 画面更新
-            InitGridView();
+            ClearInputBox();
+            Search();
         }
 
 
@@ -72,26 +72,7 @@ namespace BCMT01.dialog
         /// <param name="e"></param>
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            ErrorChecks();
-
-            string query = string.Format(Properties.Resources.SelectBCMT0101, txtId.Text, txtTitle.Text);
-
-            if (cmbCategory1.SelectedValue.ToString() != "")
-                query += string.Format(Properties.Resources.SelectBCMT0101_category1, cmbCategory1.SelectedValue.ToString());
-
-            if (cmbCategory2.SelectedValue.ToString() != "")
-                query += string.Format(Properties.Resources.SelectBCMT0101_category2, cmbCategory2.SelectedValue.ToString());
-
-            if (cmbCategory3.SelectedValue.ToString() != "")
-                query += string.Format(Properties.Resources.SelectBCMT0101_category3, cmbCategory3.SelectedValue.ToString());
-
-            var dba = SingletonObject.GetDbAdapter();
-
-            var table = dba.ExecSQL<BookMaster.ViewTableDataTable>(query);
-
-            dtGridView.SetDataSource(table);
-
-            InitGridView();
+            Search();
         }
 
         /// <summary>
@@ -103,6 +84,9 @@ namespace BCMT01.dialog
         {
             BCMT0102 modFrm = new BCMT0102();
             modFrm.ShowDialog();
+
+            ClearInputBox();
+            Search();
         }
 
         /// <summary>
@@ -186,6 +170,30 @@ namespace BCMT01.dialog
         {
             InputCheck.IsSingleQuotation(this.txtId);
             InputCheck.IsSingleQuotation(this.txtTitle);
+        }
+
+        private void Search()
+        {
+            ErrorChecks();
+
+            string query = string.Format(Properties.Resources.SelectBCMT0101, txtId.Text, txtTitle.Text);
+
+            if (cmbCategory1.SelectedValue.ToString() != "")
+                query += string.Format(Properties.Resources.SelectBCMT0101_category1, cmbCategory1.SelectedValue.ToString());
+
+            if (cmbCategory2.SelectedValue.ToString() != "")
+                query += string.Format(Properties.Resources.SelectBCMT0101_category2, cmbCategory2.SelectedValue.ToString());
+
+            if (cmbCategory3.SelectedValue.ToString() != "")
+                query += string.Format(Properties.Resources.SelectBCMT0101_category3, cmbCategory3.SelectedValue.ToString());
+
+            var dba = SingletonObject.GetDbAdapter();
+
+            var table = dba.ExecSQL<BookMaster.ViewTableDataTable>(query);
+
+            dtGridView.SetDataSource(table);
+
+            InitGridView();
         }
     }
 }
