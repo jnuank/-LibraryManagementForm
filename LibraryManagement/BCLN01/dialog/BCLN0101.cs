@@ -52,20 +52,20 @@ namespace BCLN01.dialog
         /// 図書検索画面からのコンストラクタ
         /// </summary>
         /// <param name="row"></param>
-        public BCLN0101(DataRow row)
+        public BCLN0101(DataGridViewRow row)
         {
             InitializeComponent();
             InitDiag();
 
             txtId.ReadOnly = true;
-            txtId.Text = row.Field<string>("ID");
-            txtTitle.Text = row.Field<string>("タイトル");
-            txtCategory1.Text = row.Field<string>("分類1");
-            txtCategory2.Text = row.Field<string>("分類2");
-            txtCategory3.Text = row.Field<string>("分類3");
+            txtId.Text = row.Cells[0].Value.ToString();
+            txtTitle.Text = row.Cells[1].Value.ToString();
+            txtCategory1.Text = row.Cells[2].Value.ToString();
+            txtCategory2.Text = row.Cells[3].Value.ToString();
+            txtCategory3.Text = row.Cells[4].Value.ToString();
 
             // 貸出中だったら、貸出ボタンDisableにする
-            if ( !row.IsNull("貸出状態") && row.Field<string>("貸出状態").Equals("貸出中") )
+            if ( row.Cells[5].Value != null && row.Cells[5].Value.ToString().Equals("貸出中") )
                 btnLoan.Enabled = false;
 
             txtId.TabStop = false;

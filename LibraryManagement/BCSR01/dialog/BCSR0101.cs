@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Common.dialog;
-using Common.define;
-using Common.singleton;
+﻿using BCLN01.dialog;
+using BCSR01.dataset;
 using Common.db;
+using Common.define;
+using Common.dialog;
 using Common.ErrorCheck;
 using Common.exception;
-using BCLN01.dialog;
+using Common.singleton;
+using System;
+using System.Data;
+using System.Text;
+using System.Windows.Forms;
 
 namespace BCSR01.dialog
 {
@@ -30,19 +26,18 @@ namespace BCSR01.dialog
 
         #endregion
 
-
+        #region コンストラクタ
         public BCSR0101()
         {
             InitializeComponent();
 
             InitDialog();
 
-            DBAdapter dba = SingletonObject.GetDbAdapter();
-            string query = BaseQuery();
-            dataTable = dba.ExecSQL(query);
-
+            ExecuteSearch();
             InitGridView();
         }
+
+        #endregion
 
         /// <summary>
         /// ダイアログ初期化
@@ -55,18 +50,9 @@ namespace BCSR01.dialog
 
             this.dataTable = SingletonObject.GetMemberList();
 
-            string query = "SELECT * FROM BOOK_GENRE_MASTER";
-
-            cmbCategory1.DataSource = dba.ExecSQL(query);
-            cmbCategory2.DataSource = dba.ExecSQL(query);
-            cmbCategory3.DataSource = dba.ExecSQL(query);
-
-            cmbCategory1.DisplayMember = "DIVISION_NAME";
-            cmbCategory1.ValueMember = "DIVISION_ID";
-            cmbCategory2.DisplayMember = "DIVISION_NAME";
-            cmbCategory2.ValueMember = "DIVISION_ID";
-            cmbCategory3.DisplayMember = "DIVISION_NAME";
-            cmbCategory3.ValueMember = "DIVISION_ID";
+            cmbCategory1.InitControl();
+            cmbCategory2.InitControl();
+            cmbCategory3.InitControl();
         }
 
         /// <summary>
@@ -74,18 +60,7 @@ namespace BCSR01.dialog
         /// </summary>
         private void InitGridView()
         {
-
-            //データソースを設定する
-            //dataTable = Book.GetAllData();
-            dataGridView1.DataSource = dataTable;
-
-            // 編集不可に設定
-            dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.AllowUserToDeleteRows = false;
-            dataGridView1.ReadOnly = true;
-
-            // 列サイズを表示領域いっぱいに伸ばす
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dtGridView.InitControl();
         }
 
         # region イベント
@@ -97,7 +72,6 @@ namespace BCSR01.dialog
         /// <param name="e"></param>
         private void btnSearch_Click(object sender, EventArgs e)
         {
-
             // エラーチェック
             try
             {
@@ -120,7 +94,6 @@ namespace BCSR01.dialog
 
             // 検索条件フィールドを無効化にする
             SearchBoxEnable(false);
-            
         }
 
         /// <summary>
@@ -153,34 +126,20 @@ namespace BCSR01.dialog
         private void BCMT0101_FormClosing(object sender, FormClosingEventArgs e)
         {
             if ( base.IsCancelClosing(GlobalDefine.MESSAGE_ASK_CLOSE) )
-            { e.Cancel = true; }
+                e.Cancel = true;
         }
 
-        /// <summary>
-        /// DataGridViewダブルクリック
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dtGridView_CellDubleClick(object sender, DataGridViewCellEventArgs e)
         {
             // 選択された行を取得
             int nTarget = e.RowIndex;
 
-            // 選択された行を取得
-            DataRow row = dataTable.Rows[nTarget];
-            
-            // カラム内がnullかどうか、先に判定をする
-            //if (!row.IsNull("貸出状態") && row.Field<string>("貸出状態").Equals("貸出中") )
-            //    return;
-
-            BCLN0101 loanForm = new BCLN0101(row);
+            BCLN0101 loanForm = new BCLN0101(dtGridView.SelectedRow());
             loanForm.ShowDialog();
 
             ExecuteSearch();
-
             InitGridView();
         }
-
 
         #endregion
 
@@ -222,13 +181,13 @@ namespace BCSR01.dialog
         {
             string query = string.Format(
                 "SELECT " +
-                    "BOOK_ID as 'ID', " +
-                    "BOOK_NAME as 'タイトル', " +
-                    "DIVISION_NAME1 as '分類1', " +
-                    "DIVISION_NAME2 as '分類2', " +
-                    "DIVISION_NAME3 as '分類3', " +
-                    "CASE LENDING_STATUS WHEN 0 THEN '貸出中' WHEN 1 THEN '' End as '貸出状態', " +
-                    "CASE WHEN LENDING_STATUS=0 THEN RETURN_SCHEDULE ELSE '' End as '返却予定日'" +
+                    "BOOK_ID, " +
+                    "BOOK_NAME, " +
+                    "DIVISION_NAME1, " +
+                    "DIVISION_NAME2, " +
+                    "DIVISION_NAME3, " +
+                    "CASE LENDING_STATUS WHEN 0 THEN '貸出中' WHEN 1 THEN '' End as 'LENDING_STATUS', " +
+                    "CASE WHEN LENDING_STATUS=0 THEN RETURN_SCHEDULE ELSE '' End as 'RETURN_SCHEDULE'" +
                 "FROM " +
                     "(SELECT " +
                         "*, " +
@@ -315,31 +274,23 @@ namespace BCSR01.dialog
 
             // 分類1、検索条件を追加
             if ( this.cmbCategory1.SelectedIndex > IS_CMB_BOX_EMPTY )
-            {
                 query += string.Format("AND DIVISION_ID1 = '{0}' ", cmbCategory1.SelectedValue);
-            }
 
             // 分類2、検索条件を追加
             if ( this.cmbCategory2.SelectedIndex > IS_CMB_BOX_EMPTY )
-            {
                 query += string.Format("AND DIVISION_ID2 = '{0}' ", cmbCategory2.SelectedValue);
-            }
 
             // 分類3、検索条件を追加
             if ( this.cmbCategory3.SelectedIndex > IS_CMB_BOX_EMPTY )
-            {
                 query += string.Format("AND DIVISION_ID3 = '{0}' ", cmbCategory3.SelectedValue);
-            }
 
             // 貸出状態のチェックを入れていると、貸出中でないレコードを抽出
             if ( this.chkLending.Checked )
-            {
                 query += string.Format("AND LENDING_STATUS = 1");
-            }
 
-            dataTable = dba.ExecSQL(query);
+            var viewTable = dba.ExecSQL<BookLending.ViewDataTable>(query);
+            dtGridView.ShowSearchResult(viewTable);
         }
-
 
     }
 }

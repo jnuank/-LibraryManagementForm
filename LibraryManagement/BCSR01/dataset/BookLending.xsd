@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="BookLending" targetNamespace="http://tempuri.org/BookLending.xsd" xmlns:mstns="http://tempuri.org/BookLending.xsd" xmlns="http://tempuri.org/BookLending.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="BookLending" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="BookLending" msprop:Generator_UserDSName="BookLending">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="View" msprop:Generator_TableClassName="ViewDataTable" msprop:Generator_TableVarName="tableView" msprop:Generator_TablePropName="View" msprop:Generator_RowDeletingName="ViewRowDeleting" msprop:Generator_RowChangingName="ViewRowChanging" msprop:Generator_RowEvHandlerName="ViewRowChangeEventHandler" msprop:Generator_RowDeletedName="ViewRowDeleted" msprop:Generator_UserTableName="View" msprop:Generator_RowChangedName="ViewRowChanged" msprop:Generator_RowEvArgName="ViewRowChangeEvent" msprop:Generator_RowClassName="ViewRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="BOOK_ID" msprop:Generator_ColumnVarNameInTable="columnBOOK_ID" msprop:Generator_ColumnPropNameInRow="BOOK_ID" msprop:Generator_ColumnPropNameInTable="BOOK_IDColumn" msprop:Generator_UserColumnName="BOOK_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="BOOK_NAME" msprop:Generator_ColumnVarNameInTable="columnBOOK_NAME" msprop:Generator_ColumnPropNameInRow="BOOK_NAME" msprop:Generator_ColumnPropNameInTable="BOOK_NAMEColumn" msprop:Generator_UserColumnName="BOOK_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="DIVISION_NAME1" msprop:Generator_ColumnVarNameInTable="columnDIVISION_NAME1" msprop:Generator_ColumnPropNameInRow="DIVISION_NAME1" msprop:Generator_ColumnPropNameInTable="DIVISION_NAME1Column" msprop:Generator_UserColumnName="DIVISION_NAME1" type="xs:string" minOccurs="0" />
+              <xs:element name="DIVISION_NAME2" msprop:Generator_ColumnVarNameInTable="columnDIVISION_NAME2" msprop:Generator_ColumnPropNameInRow="DIVISION_NAME2" msprop:Generator_ColumnPropNameInTable="DIVISION_NAME2Column" msprop:Generator_UserColumnName="DIVISION_NAME2" type="xs:string" minOccurs="0" />
+              <xs:element name="DIVISION_NAME3" msprop:Generator_ColumnVarNameInTable="columnDIVISION_NAME3" msprop:Generator_ColumnPropNameInRow="DIVISION_NAME3" msprop:Generator_ColumnPropNameInTable="DIVISION_NAME3Column" msprop:Generator_UserColumnName="DIVISION_NAME3" type="xs:string" minOccurs="0" />
+              <xs:element name="LENDING_STATUS" msprop:Generator_ColumnVarNameInTable="columnLENDING_STATUS" msprop:Generator_ColumnPropNameInRow="LENDING_STATUS" msprop:Generator_ColumnPropNameInTable="LENDING_STATUSColumn" msprop:Generator_UserColumnName="LENDING_STATUS" type="xs:string" minOccurs="0" />
+              <xs:element name="RETURN_SCHEDULE" msprop:Generator_ColumnVarNameInTable="columnRETURN_SCHEDULE" msprop:Generator_ColumnPropNameInRow="RETURN_SCHEDULE" msprop:Generator_ColumnPropNameInTable="RETURN_SCHEDULEColumn" msprop:Generator_UserColumnName="RETURN_SCHEDULE" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

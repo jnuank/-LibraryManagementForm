@@ -66,16 +66,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="dataset\BookLending.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BookLending.xsd</DependentUpon>
+    </Compile>
     <Compile Include="dialog\BCSR0101.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dialog\BCSR0101.Designer.cs">
       <DependentUpon>BCSR0101.cs</DependentUpon>
     </Compile>
+    <Compile Include="dialog\BookLendingGridView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="dialog\BookLendingGridView.Designer.cs">
+      <DependentUpon>BookLendingGridView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="dialog\BCSR0101.resx">
       <DependentUpon>BCSR0101.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialog\BookLendingGridView.resx">
+      <DependentUpon>BookLendingGridView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -86,6 +100,17 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="dataset\BookLending.xsc">
+      <DependentUpon>BookLending.xsd</DependentUpon>
+    </None>
+    <None Include="dataset\BookLending.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BookLending.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dataset\BookLending.xss">
+      <DependentUpon>BookLending.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
