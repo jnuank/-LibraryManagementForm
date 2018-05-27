@@ -6,6 +6,7 @@ using Common.ErrorCheck;
 using Common.exception;
 using Common.singleton;
 using System;
+using System.Text;
 using System.Windows.Forms;
 
 
@@ -121,22 +122,23 @@ namespace BCCM01.dialog
             // 検索開始
             DBAdapter dba = SingletonObject.GetDbAdapter();
 
-            string query = string.Format("SELECT " +
-                                            "USER_ID , " +
-                                            "USER_NAME, " +
-                                            "COMPANY_ABBREVIATION " +
-                                         "FROM " +
-                                            "USER_MASTER " +
-                                         "LEFT OUTER JOIN " +
-                                            "COMPANY_MASTER " +
-                                         "ON " +
-                                            "USER_MASTER.COMPANY_ID = COMPANY_MASTER.COMPANY_ID " +
-                                         "WHERE " +
-                                            "USER_NAME LIKE '%{0}%'" +
-                                            "AND USER_MASTER.COMPANY_ID = '{1}'",
-                                            textUser.Text,cmbCompany.SelectedValue);
+            StringBuilder sql = new StringBuilder();
 
-            var table = dba.ExecSQL<UserDataSet.ViewUserMasterDataTable>(query);
+            sql.AppendLine("SELECT ");
+            sql.AppendLine(" USER_ID, ");
+            sql.AppendLine(" USER_NAME, ");
+            sql.AppendLine(" COMPANY_ABBREVIATION ");
+            sql.AppendLine("FROM ");
+            sql.AppendLine(" USER_MASTER ");
+            sql.AppendLine("LEFT OUTER JOIN ");
+            sql.AppendLine(" COMPANY_MASTER ");
+            sql.AppendLine(" ON ");
+            sql.AppendLine(" USER_MASTER.COMPANY_ID = COMPANY_MASTER.COMPANY_ID ");
+            sql.AppendLine(" WHERE ");
+            sql.AppendLine($" USER_NAME LIKE '%{textUser.Text}%'");
+            sql.AppendLine($"AND USER_MASTER.COMPANY_ID = '{cmbCompany.SelectedValue}'");
+
+            var table = dba.ExecSQL<UserDataSet.ViewUserMasterDataTable>(sql.ToString());
 
             dtGridView.SetDataSource(table);
 
